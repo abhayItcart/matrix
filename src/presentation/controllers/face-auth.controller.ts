@@ -40,10 +40,12 @@ export class FaceAuthController {
       attendanceId: request.attendanceId
     });
 
-    return new VerifyFaceResponseDto(
-      result.isMatch,
-      result.confidence,
-      result.threshold,
-    );
+    return {
+      isMatch: result.isMatch,
+      confidence: result.confidence,
+      threshold: result.threshold,
+      decision: result.decision,
+      matchScore: result.matchScore,
+    };
   }
 }

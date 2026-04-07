@@ -18,6 +18,6 @@ export class FaceAIServiceAdapter implements FaceAIRepository {
       employeeId,
       attendanceId
     );
-    return result.confidence;
+    return result.data;
   }
 }

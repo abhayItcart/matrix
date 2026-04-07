@@ -13,7 +13,7 @@ export class VerifyFaceResponseDto {
     minimum: 0,
     maximum: 1
   })
-  confidence: number;
+  confidence: string;
 
   @ApiProperty({
     description: 'Threshold used for verification decision',
@@ -23,9 +23,23 @@ export class VerifyFaceResponseDto {
   })
   threshold: number;
 
-  constructor(isMatch: boolean, confidence: number, threshold: number) {
+  @ApiProperty({
+    description: 'Decision made based on the verification',
+    example: 'approved'
+  })
+  decision: string;
+
+  @ApiProperty({
+    description: 'Score representing the similarity between faces',
+    example: 0.85
+  })
+  matchScore: number;
+
+  constructor(isMatch: boolean, confidence: string, threshold: number, decision: string, matchScore: number) {
     this.isMatch = isMatch;
     this.confidence = confidence;
     this.threshold = threshold;
+    this.decision = decision;
+    this.matchScore = matchScore;
   }
 }

@@ -29,8 +29,7 @@ export class VerifyFaceUseCase {
 
   async execute(request: VerifyFaceRequest): Promise<FaceVerificationResult> {
     const { userId, selfieImageUrl, employeeId, attendanceId } = request;
-
-    const { profileUrl: profileImageUrl } = await this.identityRepository.getProfileImage(userId);
+    const profileImageUrl = await this.identityRepository.getProfileImage(userId);
 
     const { matchScore, confidence, decision, isIdentical} = await this.faceAIRepository.compareFaces(
       profileImageUrl,

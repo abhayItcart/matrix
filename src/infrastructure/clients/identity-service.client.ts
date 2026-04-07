@@ -14,9 +14,9 @@ export class IdentityServiceClient {
     this.baseUrl = this.configService.get<string>('identityServiceUrl') || 'http://localhost:3001';
   }
 
-  async getUser(userId: string): Promise<{ profileImageUrl: string }> {
+  async getUser(userId: string): Promise<any> {
     const response = await firstValueFrom(
-      this.httpService.get(`${this.baseUrl}public/user-profile?id=${userId}`),
+      this.httpService.get(`${this.baseUrl}/public/user-profile?id=${userId}`),
     );
     return response.data;
   }

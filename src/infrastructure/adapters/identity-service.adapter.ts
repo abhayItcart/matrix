@@ -8,6 +8,7 @@ export class IdentityServiceAdapter implements IdentityRepository {
 
   async getProfileImage(userId: string): Promise<string> {
     const user = await this.identityServiceClient.getUser(userId);
-    return user.profileImageUrl;
+    const img = user.profileUrl;
+    return img;
   }
 }

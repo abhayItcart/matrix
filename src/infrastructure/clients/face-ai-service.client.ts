@@ -19,7 +19,7 @@ export class FaceAIServiceClient {
     selfieImageUrl: string,
     employeeId: string,
     attendanceId: string
-  ): Promise<{ confidence: number }> {
+  ): Promise<any> {
     const response = await firstValueFrom(
       this.httpService.post(`${this.baseUrl}/verify`, {
         employeeId,

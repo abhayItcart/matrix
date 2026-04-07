@@ -32,7 +32,7 @@ export class VerifyFaceUseCase {
 
     const { profileUrl: profileImageUrl } = await this.identityRepository.getProfileImage(userId);
 
-    const confidence = await this.faceAIRepository.compareFaces(
+    const { matchScore, confidence, decision, isIdentical} = await this.faceAIRepository.compareFaces(
       profileImageUrl,
       selfieImageUrl,
       employeeId,
@@ -40,6 +40,6 @@ export class VerifyFaceUseCase {
 
     );
 
-    return FaceVerificationResult.create(confidence, this.CONFIDENCE_THRESHOLD);
+    return FaceVerificationResult.create(matchScore, this.CONFIDENCE_THRESHOLD, decision, confidence);
   }
 }

@@ -3,10 +3,12 @@ export class FaceVerificationResult {
     public readonly isMatch: boolean,
     public readonly confidence: number,
     public readonly threshold: number,
+    public readonly matchScore: number,
+    public readonly decision: string
   ) {}
 
-  static create(confidence: number, threshold: number): FaceVerificationResult {
-    const isMatch = confidence >= threshold;
-    return new FaceVerificationResult(isMatch, confidence, threshold);
+  static create(matchScore: number, threshold: number, decision: string, confidence: string): FaceVerificationResult {
+    const isMatch = matchScore >= threshold && decision === 'accepted';
+    return new FaceVerificationResult(isMatch, parseFloat(confidence), threshold, matchScore, decision);
   }
 }

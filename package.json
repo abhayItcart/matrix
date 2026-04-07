@@ -2,15 +2,18 @@
   "name": "matrix-service",
   "version": "1.0.0",
   "description": "AI Orchestration Service - Gateway between business services and AI services",
-  "main": "dist/main.js",
   "scripts": {
-    "build": "nest build",
-    "start": "nest start",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/main.js",
     "start:dev": "nest start --watch",
-    "start:prod": "node dist/main",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:prod": "node dist/main.js"
   },
-  "keywords": ["nestjs", "microservice", "ai-orchestration", "clean-architecture"],
+  "keywords": [
+    "nestjs",
+    "microservice",
+    "ai-orchestration",
+    "clean-architecture"
+  ],
   "author": "AixHub",
   "license": "MIT",
   "dependencies": {

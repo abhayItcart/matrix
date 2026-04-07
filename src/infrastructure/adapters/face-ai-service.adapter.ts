@@ -8,11 +8,15 @@ export class FaceAIServiceAdapter implements FaceAIRepository {
 
   async compareFaces(
     profileImageUrl: string,
-    selfieUrl: string,
+    selfieImageUrl: string,
+    employeeId: string,
+    attendanceId: string
   ): Promise<number> {
     const result = await this.faceAIServiceClient.compareFaces(
       profileImageUrl,
-      selfieUrl,
+      selfieImageUrl,
+      employeeId,
+      attendanceId
     );
     return result.confidence;
   }

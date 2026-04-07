@@ -7,5 +7,13 @@ export class VerifyFaceRequestDto {
 
   @IsUrl()
   @IsNotEmpty()
-  selfieUrl: string;
+  selfieImageUrl: string;
+
+  @IsString()
+  @IsNotEmpty()
+  employeeId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  attendanceId: string;
 }

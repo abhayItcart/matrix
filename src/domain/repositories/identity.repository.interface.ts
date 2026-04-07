@@ -1,5 +1,6 @@
 export interface IdentityRepository {
-  getProfileImage(userId: string): Promise<string>;
+  getProfileImage(userId: string): Promise<any>;
 }
 
 export const IDENTITY_REPOSITORY = Symbol('IdentityRepository');
+

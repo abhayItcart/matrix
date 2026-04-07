@@ -15,7 +15,7 @@ async function bootstrap() {
 
   app.enableCors();
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 7000;
   await app.listen(port);
 
   console.log(`Matrix Service is running on: http://localhost:${port}`);

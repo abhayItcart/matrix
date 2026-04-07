@@ -7,14 +7,16 @@ import { VerifyFaceResponseDto } from '../dtos/verify-face-response.dto';
 export class FaceAuthController {
   constructor(private readonly verifyFaceUseCase: VerifyFaceUseCase) {}
 
-  @Post('verify')
+  @Post('face-verify')
   @UsePipes(new ValidationPipe({ transform: true }))
   async verify(
     @Body() request: VerifyFaceRequestDto,
   ): Promise<VerifyFaceResponseDto> {
     const result = await this.verifyFaceUseCase.execute({
       userId: request.userId,
-      selfieUrl: request.selfieUrl,
+      selfieImageUrl: request.selfieImageUrl,
+      employeeId: request.employeeId,
+      attendanceId: request.attendanceId
     });
 
     return new VerifyFaceResponseDto(

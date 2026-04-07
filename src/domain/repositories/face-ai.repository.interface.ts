@@ -1,5 +1,8 @@
 export interface FaceAIRepository {
-  compareFaces(profileImageUrl: string, selfieUrl: string): Promise<number>;
+  compareFaces(profileImageUrl: string,
+    selfieImageUrl: string,
+    employeeId: string,
+    attendanceId: string): Promise<number>;
 }
 
 export const FACE_AI_REPOSITORY = Symbol('FaceAIRepository');

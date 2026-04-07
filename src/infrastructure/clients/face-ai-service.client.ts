@@ -11,17 +11,21 @@ export class FaceAIServiceClient {
     private readonly httpService: HttpService,
     private readonly configService: ConfigService,
   ) {
-    this.baseUrl = this.configService.get<string>('faceAiServiceUrl') || 'http://localhost:5000';
+    this.baseUrl = this.configService.get<string>('faceAiServiceUrl') || 'http://localhost:7000';
   }
 
   async compareFaces(
     profileImageUrl: string,
-    selfieUrl: string,
+    selfieImageUrl: string,
+    employeeId: string,
+    attendanceId: string
   ): Promise<{ confidence: number }> {
     const response = await firstValueFrom(
-      this.httpService.post(`${this.baseUrl}/compare`, {
+      this.httpService.post(`${this.baseUrl}/verify`, {
+        employeeId,
         profileImageUrl,
-        selfieUrl,
+        selfieImageUrl,
+        attendanceId
       }),
     );
     return response.data;

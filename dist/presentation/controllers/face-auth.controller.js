@@ -26,7 +26,6 @@ let FaceAuthController = class FaceAuthController {
         const result = await this.verifyFaceUseCase.execute({
             userId: request.userId,
             selfieImageUrl: request.selfieImageUrl,
-            employeeId: request.employeeId,
             attendanceId: request.attendanceId
         });
         return {

@@ -20,12 +20,11 @@ let FaceAIServiceClient = class FaceAIServiceClient {
         this.configService = configService;
         this.baseUrl = this.configService.get('faceAiServiceUrl') || 'http://localhost:7000';
     }
-    async compareFaces(profileImageUrl, selfieImageUrl, employeeId, attendanceId) {
+    async compareFaces(profileImageUrl, selfieImageUrl, attendanceId) {
         const response = await (0, rxjs_1.firstValueFrom)(this.httpService.post(`${this.baseUrl}/verify`, {
-            employeeId,
             profileImageUrl,
             selfieImageUrl,
-            attendanceId
+            attendanceId,
         }));
         return response.data;
     }

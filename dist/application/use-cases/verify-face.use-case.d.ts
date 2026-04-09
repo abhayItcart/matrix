@@ -4,7 +4,6 @@ import { FaceAIRepository } from '../../domain/repositories/face-ai.repository.i
 export interface VerifyFaceRequest {
     userId: string;
     selfieImageUrl: string;
-    employeeId: string;
     attendanceId: string;
 }
 export declare class VerifyFaceUseCase {

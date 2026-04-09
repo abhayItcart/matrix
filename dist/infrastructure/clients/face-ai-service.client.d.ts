@@ -5,5 +5,5 @@ export declare class FaceAIServiceClient {
     private readonly configService;
     private readonly baseUrl;
     constructor(httpService: HttpService, configService: ConfigService);
-    compareFaces(profileImageUrl: string, selfieImageUrl: string, employeeId: string, attendanceId: string): Promise<any>;
+    compareFaces(profileImageUrl: string, selfieImageUrl: string, attendanceId: string): Promise<any>;
 }

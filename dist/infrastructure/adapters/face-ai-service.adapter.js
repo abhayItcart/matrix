@@ -16,8 +16,8 @@ let FaceAIServiceAdapter = class FaceAIServiceAdapter {
     constructor(faceAIServiceClient) {
         this.faceAIServiceClient = faceAIServiceClient;
     }
-    async compareFaces(profileImageUrl, selfieImageUrl, employeeId, attendanceId) {
-        const result = await this.faceAIServiceClient.compareFaces(profileImageUrl, selfieImageUrl, employeeId, attendanceId);
+    async compareFaces(profileImageUrl, selfieImageUrl, attendanceId) {
+        const result = await this.faceAIServiceClient.compareFaces(profileImageUrl, selfieImageUrl, attendanceId);
         return result.data;
     }
 };

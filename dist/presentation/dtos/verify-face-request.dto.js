@@ -35,15 +35,6 @@ __decorate([
 ], VerifyFaceRequestDto.prototype, "selfieImageUrl", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Unique identifier of the employee',
-        example: 'emp_987654321'
-    }),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], VerifyFaceRequestDto.prototype, "employeeId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
         description: 'Unique identifier of the attendance record',
         example: 'att_456789123'
     }),

@@ -24,9 +24,9 @@ let VerifyFaceUseCase = class VerifyFaceUseCase {
         this.CONFIDENCE_THRESHOLD = 0.7;
     }
     async execute(request) {
-        const { userId, selfieImageUrl, employeeId, attendanceId } = request;
+        const { userId, selfieImageUrl, attendanceId } = request;
         const profileImageUrl = await this.identityRepository.getProfileImage(userId);
-        const { matchScore, confidence, decision, isIdentical } = await this.faceAIRepository.compareFaces(profileImageUrl, selfieImageUrl, employeeId, attendanceId);
+        const { matchScore, confidence, decision, isIdentical } = await this.faceAIRepository.compareFaces(profileImageUrl, selfieImageUrl, attendanceId);
         return face_verification_result_entity_1.FaceVerificationResult.create(matchScore, this.CONFIDENCE_THRESHOLD, decision, confidence);
     }
 };

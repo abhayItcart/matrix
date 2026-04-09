@@ -12,7 +12,6 @@ import {
 export interface VerifyFaceRequest {
   userId: string;
   selfieImageUrl: string;
-  employeeId: string;
   attendanceId: string;
 }
 
@@ -28,15 +27,13 @@ export class VerifyFaceUseCase {
   ) {}
 
   async execute(request: VerifyFaceRequest): Promise<FaceVerificationResult> {
-    const { userId, selfieImageUrl, employeeId, attendanceId } = request;
+    const { userId, selfieImageUrl, attendanceId } = request;
     const profileImageUrl = await this.identityRepository.getProfileImage(userId);
 
-    const { matchScore, confidence, decision, isIdentical} = await this.faceAIRepository.compareFaces(
+    const { matchScore, confidence, decision, isIdentical } = await this.faceAIRepository.compareFaces(
       profileImageUrl,
       selfieImageUrl,
-      employeeId,
-      attendanceId
-
+      attendanceId,
     );
 
     return FaceVerificationResult.create(matchScore, this.CONFIDENCE_THRESHOLD, decision, confidence);

@@ -19,14 +19,6 @@ export class VerifyFaceRequestDto {
   selfieImageUrl: string;
 
   @ApiProperty({
-    description: 'Unique identifier of the employee',
-    example: 'emp_987654321'
-  })
-  @IsString()
-  @IsNotEmpty()
-  employeeId: string;
-
-  @ApiProperty({
     description: 'Unique identifier of the attendance record',
     example: 'att_456789123'
   })

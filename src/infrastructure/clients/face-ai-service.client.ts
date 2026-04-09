@@ -17,15 +17,13 @@ export class FaceAIServiceClient {
   async compareFaces(
     profileImageUrl: string,
     selfieImageUrl: string,
-    employeeId: string,
-    attendanceId: string
+    attendanceId: string,
   ): Promise<any> {
     const response = await firstValueFrom(
       this.httpService.post(`${this.baseUrl}/verify`, {
-        employeeId,
         profileImageUrl,
         selfieImageUrl,
-        attendanceId
+        attendanceId,
       }),
     );
     return response.data;

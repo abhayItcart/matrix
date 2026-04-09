@@ -8,33 +8,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IdentityServiceClient = void 0;
 const common_1 = require("@nestjs/common");
-const axios_1 = require("@nestjs/axios");
 const config_1 = require("@nestjs/config");
-const rxjs_1 = require("rxjs");
+const axios_1 = __importDefault(require("axios"));
 let IdentityServiceClient = class IdentityServiceClient {
-    constructor(httpService, configService) {
-        this.httpService = httpService;
+    constructor(configService) {
         this.configService = configService;
-        this.baseUrl = this.configService.get('identityServiceUrl') || 'http://localhost:3001';
+        this.baseUrl = this.configService.get('identityServiceUrl') || 'http://localhost:3000';
+        this.httpClient = axios_1.default.create({
+            baseURL: this.baseUrl,
+            timeout: 10000,
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
     }
     async getUser(userId) {
+        // const response = await this.httpService.get(`${this.baseUrl}/public/user-profile?id=${userId}`)
+        // return response;
         try {
-            const response = await (0, rxjs_1.firstValueFrom)(this.httpService.get(`${this.baseUrl}/public/user-profile?id=${userId}`));
+            const response = await this.httpClient.get(`/public/user-profile?id=${userId}`);
             return response.data;
         }
         catch (error) {
-            console.error(`Failed to fetch user profile for userId: ${userId}`, error);
-            throw new Error('Unable to retrieve user profile from Identity Service');
+            console.log(error);
+            return error;
         }
     }
 };
 exports.IdentityServiceClient = IdentityServiceClient;
 exports.IdentityServiceClient = IdentityServiceClient = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [axios_1.HttpService,
-        config_1.ConfigService])
+    __metadata("design:paramtypes", [config_1.ConfigService])
 ], IdentityServiceClient);
 //# sourceMappingURL=identity-service.client.js.map

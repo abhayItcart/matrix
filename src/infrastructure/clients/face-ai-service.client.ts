@@ -1,31 +1,36 @@
-import { Injectable } from '@nestjs/common';
-import { HttpService } from '@nestjs/axios';
-import { ConfigService } from '@nestjs/config';
-import { firstValueFrom } from 'rxjs';
+import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import axios, { AxiosInstance } from "axios";
 
 @Injectable()
 export class FaceAIServiceClient {
   private readonly baseUrl: string;
+  private readonly httpClient: AxiosInstance;
 
   constructor(
-    private readonly httpService: HttpService,
     private readonly configService: ConfigService,
   ) {
-    this.baseUrl = this.configService.get<string>('faceAiServiceUrl') || 'http://localhost:7000';
+    this.baseUrl = this.configService.get<string>("faceAiServiceUrl") || "http://localhost:7000";
+    this.httpClient = axios.create({
+      baseURL: this.baseUrl,
+      timeout: 10000,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
 
-  async compareFaces(
-    profileImageUrl: string,
-    selfieImageUrl: string,
-    attendanceId: string,
-  ): Promise<any> {
-    const response = await firstValueFrom(
-      this.httpService.post(`${this.baseUrl}/verify`, {
+  async compareFaces(employeeId: string, profileImageUrl: string, selfieImageUrl: string, attendanceId: string): Promise<any> {
+    try {
+      const response = await this.httpClient.post(`/verify`, {
+        employeeId,
         profileImageUrl,
         selfieImageUrl,
         attendanceId,
-      }),
-    );
-    return response.data;
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
   }
 }

@@ -6,12 +6,19 @@ import { FaceAIServiceClient } from '../clients/face-ai-service.client';
 export class FaceAIServiceAdapter implements FaceAIRepository {
   constructor(private readonly faceAIServiceClient: FaceAIServiceClient) {}
 
-  async compareFaces(
-    profileImageUrl: string,
-    selfieImageUrl: string,
-    attendanceId: string,
-  ): Promise<any> {
+  async compareFaces({
+    employeeId,
+    profileImageUrl,
+    selfieImageUrl,
+    attendanceId,
+  }: {
+    employeeId: string;
+    profileImageUrl: string;
+    selfieImageUrl: string;
+    attendanceId: string;
+  }): Promise<any> {
     const result = await this.faceAIServiceClient.compareFaces(
+      employeeId,
       profileImageUrl,
       selfieImageUrl,
       attendanceId,

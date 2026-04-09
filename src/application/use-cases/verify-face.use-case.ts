@@ -30,12 +30,19 @@ export class VerifyFaceUseCase {
     const { userId, selfieImageUrl, attendanceId } = request;
     const profileImageUrl = await this.identityRepository.getProfileImage(userId);
 
-    const { matchScore, confidence, decision, isIdentical } = await this.faceAIRepository.compareFaces(
-      profileImageUrl,
-      selfieImageUrl,
-      attendanceId,
-    );
+    if(!profileImageUrl){
+      return FaceVerificationResult.create(0, 0, 'REJECTED', "No Profile Picture Found", false);
+    }
 
-    return FaceVerificationResult.create(matchScore, this.CONFIDENCE_THRESHOLD, decision, confidence);
+    const { matchScore, confidence, decision, isIdentical } = await this.faceAIRepository.compareFaces(
+      {
+        employeeId: userId,
+        profileImageUrl,
+        selfieImageUrl,
+        attendanceId,
+      }
+    );
+    const result = FaceVerificationResult.create(matchScore, this.CONFIDENCE_THRESHOLD, decision, confidence, isIdentical);
+    return result;
   }
 }
